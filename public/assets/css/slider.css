@@ -1,0 +1,314 @@
+body {
+    background: linear-gradient(135deg, #f0f4c3, #c5cae9);
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  section.form-design .card-body {
+    padding: 0;
+  }
+  
+  .card {
+    max-width: 350px;
+    border: none;
+    border-radius: 16px;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style for form-check container */
+  .form-check-container {
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    padding: 12px;
+    background-color: #f9f9f9;
+  }
+  
+  .form-check-wrapper {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Border-line between two radio buttons */
+  .border-line {
+    width: 2px;
+    background-color: #ddd;
+    margin: 0 10px;
+    height: 48px;
+  }
+  
+  .btn-radio-creative {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 15px;
+    background-color: #f1f1f1;
+    border-radius: 12px;
+    cursor: pointer;
+    color: #4a4a4a;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .form-check-input {
+    display: block;
+  }
+  
+  .form-check-input:checked + .btn-radio-creative {
+    background: linear-gradient(135deg, #2196f3, #21cbf3);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+    transform: translateY(-2px);
+  }
+  
+  .form-check-input:checked + .btn-radio-creative i {
+    color: white;
+    transform: rotate(360deg);
+    transition: transform 0.3s;
+  }
+  
+  .form-check-label i {
+    color: #039be5;
+    font-size: 1.2rem;
+    transition: transform 0.3s;
+  }
+  
+  .form-control {
+    height: 48px;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .form-control:focus {
+    border-color: #2196f3;
+    box-shadow: 0 0 6px rgba(33, 150, 243, 0.3);
+  }
+  
+  .btn-gradient {
+    background: linear-gradient(135deg, #2196f3, #21cbf3);
+    color: white;
+    height: 50px;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+  }
+  
+  .btn-gradient:hover {
+    transform: scale(1.05);
+  }
+  
+  .agree-text {
+    font-size: 12px;
+    color: #616161;
+  }
+  
+  .terms {
+    font-size: 12px;
+    color: #039be5;
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 576px) {
+    .card {
+        padding: 15px;
+    }
+  
+    .btn-gradient {
+        width: 100%;
+    }
+  }
+  
+  .uploader__empty-state {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    padding: 10px 16px;
+    column-gap: 10px;
+    /* border: 2px dashed #d0d0d0; */
+    /* border-radius: 12px; */
+    /* padding: 40px; */
+    width: 100%;
+    /* max-width: 400px; */
+    /* height: 200px; */
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+  }
+  
+  .uploader__empty-state:hover {
+    border-color: #a0a0a0;
+    background-color: #f1f1f1;
+  }
+  
+  .uploader__empty-state--with-display-name {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+  }
+  
+  .uploader__empty-state--with-directories-selector {
+    position: relative;
+  }
+  
+  .styles_module_wtIcon__d2f058f9 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* margin-bottom: 20px; */
+  }
+  
+  .uploader__empty-state-text {
+    display: flex;
+    align-items: flex-start;
+    justify-content: left;
+    /* gap: 10px; */ /* space between icon and text */
+    flex-direction: column;
+  }
+  
+  .styles_module_wtIconSvg__d2f058f9 {
+    width: 50px;
+    height: 50px;
+    color: #039be5;
+    transition: transform 0.3s ease;
+  }
+  
+  .styles_module_wtIcon__d2f058f9:hover .styles_module_wtIconSvg__d2f058f9 {
+    transform: scale(1.1);
+  }
+  
+  .uploader__empty-state-text h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    text-align: left;
+    color: #444;
+  }
+  
+  .uploader__sub-title {
+    background: none;
+    border: none;
+    font-size: 17px;
+    font-weight: 500;
+    color: #dc3c30;
+    /* text-decoration: underline; */
+    cursor: pointer;
+    /* transition: color 0.3s ease; */
+    text-align: left;
+    padding: 0;
+  }
+  
+  .uploader__sub-title:hover {
+    color: #0277bd;
+  }
+  
+  /* Media Query for responsiveness */
+  @media (max-width: 576px) {
+    .uploader__empty-state {
+        padding: 20px;
+        height: 180px;
+    }
+  
+    .uploader__empty-state-text h2 {
+        font-size: 1.2rem;
+    }
+  
+    .styles_module_wtIconSvg__d2f058f9 {
+        width: 40px;
+        height: 40px;
+    }
+  }
+  
+  .form-div {
+    padding: 20px 0px 0px;
+  }
+  
+  
+  .transfer__footer {
+    border-top: none;
+    display: flex;
+    flex-direction: column;
+    row-gap: 18px;
+    position: relative;
+    height: auto;
+    padding: .5rem 0.25rem 0.25rem;
+  }
+  
+  .TransferOptionsIconBar_iconbar__yu_2U {
+    display: flex;
+    gap: 16px;
+    flex-grow: 1; /* Makes the icon bar take the available space */
+    height: 3rem;
+    border: 1px solid #d6d6d6;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0px 0px;
+    /* z-index: 1000; */
+    position: relative;
+  }
+  
+  .TransferOptionsIconBar_iconButton__Ioj99 {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .TransferOptionsIconBar_iconButton__Ioj99 svg {
+    width: 32px;
+    height: 32px;
+    fill: currentColor;
+    transition: fill 0.3s ease;
+  }
+  
+  .TransferOptionsIconBar_iconButton__Ioj99:hover svg {
+    fill: #007bff; /* Color on hover */
+  }
+  
+  .TransferOptionsIconBar_disabled__EjhRM {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
+  .transfer__footer--iconbar {
+    /* display: grid; */
+    /* align-items: center; */
+    /* text-align: center; */
+    width: 100%;
+    /* margin: 0px auto; */
+  }
+  
+  .transfer__button {
+    padding: 10px 16px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+     /* Add space between the last icon and the button */
+    left: 50%;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    font-weight: 600;
+  }
+  
+  .transfer__button--inactive {
+    /* background-color: #cccccc; */
+    cursor: not-allowed;
+  }
+  
+  .transfer__button:hover:not(.transfer__button--inactive) {
+    background-color: #0056b3;
+  }
+  
