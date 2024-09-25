@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id')->nullable();
             $table->text('upload_file_url')->nullable();
-            $table->tinyInteger('file_type')->default(0);
+            $table->string('file_type')->nullable();
             $table->timestamps();
         });
     }

@@ -10,7 +10,12 @@ class File extends Model
     use HasFactory;
     protected $fillable = [
         'user_id',
-        'upload_file_url',
-        'file_type'
+        'upload_file_path',
+        'file_link',
+        'file_type',
+        'unique_id',
+        'title',
+        'message',
+        'file_count'
     ];
 }
