@@ -6,7 +6,7 @@
     <div class="app-header header-shadow">
         <div class="app-header__logo">
             <div class="logo-src">
-                <img src="assets/image/black-logo.png">
+                <img src="{{ asset('assets/image/black-logo.png') }}">
             </div>
             <div class="header__pane ml-auto">
                 <div>
@@ -189,22 +189,21 @@
                             <tbody>
                                 @php $i = 1; @endphp <!-- Initialized counter outside of the loop -->
                                 @foreach($userFiles as $row)
-                                <tr>
+                                <tr id="userFile_{{ $row['id'] }}">
                                     <th scope="row">{{ $i++ }}</th> <!-- No semicolon -->
                                     <td>{{ $row['file_type'] }}</td> <!-- No semicolon -->
                                     <td>{{ $row['title'] }}</td> <!-- No semicolon -->
                                     <td>{{ $row['message'] }}</td> <!-- No semicolon -->
                                     <td>
-                                        <button class="btn btn-info" data-link="{{ $row['file_link'] }}" onclick="copyToClipboard(this)">Copy Link</button>
+                                        <button class="btn btn-info copyLink" data-link="{{ $row['file_link'] }}" onclick="copyToClipboard(this)">Copy Link</button>
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-primary dlt-btn" data-rowId="{{ $row['id'] }}">Delete</button>
-
+                                        <button type="button" class="btn btn-primary dlt-btn" data-rowid="{{ $row['id'] }}">Delete</button>
                                     </td>
                                 </tr>
                                 @endforeach
                             </tbody>
-                        </table>@
+                        </table>
                         @else
                         <p>No files found.</p> <!-- If there are no files -->
                         @endif
@@ -220,16 +219,17 @@
 @section('js_scripts')
 <script>
     $(document).ready(function() {
-
+        $('copyLink').text('Copy Link');
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+            }   
         });
         
         $('.dlt-btn').on('click', function(e) {
             e.preventDefault();
-            var rowid = $(this).data('rowId');
+            var rowid = $(this).data('rowid');
+            console.log(rowid);
             $.ajax({
                 url: "{{ route('delete_file_link') }}",
                 type: 'delete',
@@ -237,10 +237,13 @@
                     'rowId': rowid
                 },
                 success: function(response) {
-                    console.log(response);
+                    // console.log(response);
+                    alert(response.message);
+                    $('#userFile_'+rowid).remove();
+
                 },
-                error: function(xhr, status, error) {
-                    console.log('Error :' + error);
+                error: function(xhr) {
+                    alert('Error :' + xhr.responseText);
                 }
             })
         })
@@ -259,6 +262,7 @@
 
         // Copy the text inside the text area
         document.execCommand("copy");
+        $('.copyLink').text('Copied');
 
         // Remove the temporary text area element
         document.body.removeChild(tempInput);

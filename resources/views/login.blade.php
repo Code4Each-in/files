@@ -12,8 +12,8 @@ body {
   flex-direction: column;
   background: #f6f5f7;
   font-family: 'Montserrat', sans-serif;
-  min-height: 100%;
-  margin: 10%;
+  /* min-height: 100%; */
+  margin: 4.5%;
 }
  .container {
   position: relative;
@@ -126,6 +126,24 @@ a {
   cursor: pointer;
 }
 button:active {
+  transform: scale(0.9);
+}
+ .button {
+  color: #fff;
+  background: #ff4b2b;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 55px;
+  margin: 20px;
+  border-radius: 20px;
+  border: 1px solid #ff4b2b;
+  outline: none;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+  cursor: pointer;
+}
+.button:active {
   transform: scale(0.9);
 }
  #SignIn, #main_id #SignUp {
@@ -263,12 +281,14 @@ button:active {
             <div class="overlay-left">
                 <h1>Welcome Back To C4E</h1>
                 <p>To keep connected with us please login with your personal info</p>
-                <button id="SignIn">Sign In</button>
+                <!-- <button id="SignIn">Log In</button> -->
+                <a href="{{ route('login') }}" class="button" id="SignIn">Log In</a>
             </div>
             <div class="overlay-right">
                 <h1>Welcome To Join C4E</h1>
                 <p>Enter your personal details and start your journey with us</p>
-                <button id="SignUp">Sign Up</button>
+                <!-- <button id="SignUp">Register</button> -->
+                <a href="{{ route('register') }}" class="button" id="SignUp">Register</a>
             </div>
         </div>
     </div>
@@ -288,7 +308,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   if(pageKey=='login'){
     container.classList.remove('right-panel-active');
-  }else if(pageKey=='signup'){
+  }else if(pageKey=='register'){
     container.classList.add('right-panel-active');
   }  
 
@@ -334,7 +354,7 @@ document.addEventListener('DOMContentLoaded', function() {
       data: formData,
       success: function(response) {
         // Redirect or handle login success
-        window.location.href = '{{ route('dashboard') }}';
+        window.location.href = '{{ route('home') }}';
       },
       error: function(xhr) {
                 var errors = xhr.responseJSON.errors;

@@ -27,6 +27,15 @@ class DashboardController extends Controller
 
     public function deleteFileLink(Request $request)
     {
-        dd($request->rowId);
+
+        // dd($request->id);
+        try {
+            $userFile =  File::findOrFail($request->rowId);
+            // dd($userFile);
+            $userFile->delete();
+            return response()->json(['message' => 'User File dleted succesfully'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to delete user file'], 500);
+        }
     }
 }
