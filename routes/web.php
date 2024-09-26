@@ -36,7 +36,7 @@ Route::get('download-file/{file_id}', [FilesController::class, 'downloadFile'])-
 //===================Authentication============================
 Route::get('login', [AuthController::class, 'index'])->name('login');
 
-Route::get('signup', [AuthController::class, 'index'])->name('signup');
+Route::get('register', [AuthController::class, 'index'])->name('register');
 Route::post('register', [AuthController::class, 'register'])->name('register');
 Route::post('login', [AuthController::class, 'login'])->name('login.post'); 
 Route::get('logout', [AuthController::class, 'logOut'])->name('logout');

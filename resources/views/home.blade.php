@@ -67,7 +67,7 @@
                         <a href="{{ route('login') }}" class="btn login_btn" data-mdb-ripple-init>Login</a>
                         <!-- <button data-mdb-ripple-init type="button" class="btn btn-link px-3">Login</button> -->
                         <!-- <button data-mdb-ripple-init type="button" class="btn btn-primary">Sign up for free</button> -->
-                        <a href="{{ route('signup') }}" class="btn sign_up_btn" data-mdb-ripple-init>Sign up for free</a>
+                        <a href="{{ route('register') }}" class="btn sign_up_btn" data-mdb-ripple-init>Register for free</a>
                     </div>
                 </div>
                 @endif
@@ -94,37 +94,37 @@
                                     <div class="slick">
                                         <div class="item">
                                             <div class="bg">
-                                                <img src="assets/image/slide1.jpg" alt="Slide 1">
+                                                <img src="{{ asset('assets/image/slide1.jpg') }}" alt="Slide 1">
                                             </div>
                                         </div>
                                         <div class="item">
                                             <div class="bg">
-                                                <img src="assets/image/slide2.jpeg" alt="Slide 2">
+                                                <img src="{{ asset('assets/image/slide2.jpeg') }}" alt="Slide 2">
                                             </div>
                                         </div>
                                         <div class="item">
                                             <div class="bg">
-                                                <img src="assets/image/slide3.jpeg" alt="Slide 3">
+                                                <img src="{{ asset('assets/image/slide3.jpeg') }}" alt="Slide 3">
                                             </div>
                                         </div>
                                         <div class="item">
                                             <div class="bg">
-                                                <img src="assets/image/slide4.jpeg" alt="Slide 4">
+                                                <img src="{{ asset('assets/image/slide4.jpeg') }}" alt="Slide 4">
                                             </div>
                                         </div>
                                         <div class="item">
                                             <div class="bg">
-                                                <img src="assets/image/slide5.jpeg" alt="Slide 5">
+                                                <img src="{{ asset('assets/image/slide5.jpeg') }}" alt="Slide 5">
                                             </div>
                                         </div>
                                         <div class="item">
                                             <div class="bg">
-                                                <img src="assets/image/slide6.jpeg" alt="Slide 2">
+                                                <img src="{{ asset('assets/image/slide6.jpeg') }}" alt="Slide 2">
                                             </div>
                                         </div>
                                         <div class="item">
                                             <div class="bg">
-                                                <img src="assets/image/slide7.jpeg" alt="Slide 7">
+                                                <img src="{{ asset('assets/image/slide7.jpeg') }}" alt="Slide 7">
                                             </div>
                                         </div>
                                     </div>

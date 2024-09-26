@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\File;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class FilesController extends Controller
 {
@@ -19,28 +20,28 @@ class FilesController extends Controller
         //  print_r($resquest->uniquid);    
         //  echo $request->title.'<br>'.$request->message; 
         $validated = $request->validate([
-            'title'=> 'required|string|max:255',
-            'fileToTransfer'=> 'required|file|mimes:jpg,png,pdf|max:5120'
+            'title' => 'required|string|max:255',
+            'fileToTransfer' => 'required|max:500'
 
         ]);
-        $fileName='';
-        $fileType = ((isset($request->file_type) && !empty($request->file_type))? $request->file_type: null);
-        $title = ((isset($request->title) && !empty($request->title))? $request->title: null);        
+        $fileName = '';
+        $fileType = ((isset($request->file_type) && !empty($request->file_type)) ? $request->file_type : null);
+        $title = ((isset($request->title) && !empty($request->title)) ? $request->title : null);
         if ($request->hasFile('fileToTransfer')) {
             $fileName = time() . '.' . $request->fileToTransfer->getClientOriginalExtension();
             $path = public_path('assets/files/');
-            $request->fileToTransfer->move($path,$fileName);
+            $request->fileToTransfer->move($path, $fileName);
             // $fileUrl = 'assets/files/' . $fileName;
         }
         $uniqId = substr(uniqid(), 0, 10);  // First 10 characters of the uniqid
-        $url = env('APP_URL', 'http://localhost');        
-        $fileLink = $url . '/download-file/' . $uniqId; 
-        $userId = ((Auth::check())? Auth::user()->id: null); 
+        $url = env('APP_URL', 'http://localhost');
+        $fileLink = $url . '/download-file/' . $uniqId;
+        $userId = ((Auth::check()) ? Auth::user()->id : null);
         File::create([
             'user_id' => $userId,
-            'upload_file_path' => $fileName,  
-            'file_link' => $fileLink,  
-            'file_type' => $fileType,  
+            'upload_file_path' => $fileName,
+            'file_link' => $fileLink,
+            'file_type' => $fileType,
             'unique_id' => $uniqId
         ]);
         return response()->json(['status' => true, 'success' => 'Form submitted and file uploaded successfully!', 'fileLink' => $fileLink]);
@@ -51,14 +52,20 @@ class FilesController extends Controller
 
         $fileDetail = File::where('unique_id', $fileid)->first();
         // dd($fileDetail);
+        if ($fileDetail['file_type'] == 'private') {
+            File::where('id', $fileDetail['id'])->update(array('private_link_hit' => 'Y'));
+            return Redirect::to('login');
+        } else {
+            // Assuming file is stored in public/files/
+            $filePath = public_path('assets/files/' . $fileDetail['upload_file_path']);
 
-        // Assuming file is stored in public/files/
-        $filePath = public_path('assets/files/' . $fileDetail['upload_file_path']);
-
-        if (!file_exists($filePath)) {
-            abort(404, "File not found.");
+            if (!file_exists($filePath)) {
+                abort(404, "File not found.");
+            } else {
+                // Increment the download count
+                $fileDetail->increment('file_count');
+                return response()->download($filePath);
+            }
         }
-
-        return response()->download($filePath);
     }
 }
