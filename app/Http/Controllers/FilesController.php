@@ -21,7 +21,7 @@ class FilesController extends Controller
         //  echo $request->title.'<br>'.$request->message; 
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'fileToTransfer' => 'required|max:500'
+            'fileToTransfer' => 'required|max:512000'
 
         ]);
         $fileName = '';
