@@ -22,7 +22,6 @@ class FilesController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'fileToTransfer' => 'required|max:512000'
-
         ]);
         $fileName = '';
         $fileType = ((isset($request->file_type) && !empty($request->file_type)) ? $request->file_type : null);
