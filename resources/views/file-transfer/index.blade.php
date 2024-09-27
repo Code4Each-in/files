@@ -13,6 +13,8 @@
     }
 </style>
 @endpush
+
+
 <div class="col-lg-4 col-md-12">
     <div class="form-design">
         <div class="card px-3 py-4 shadow-lg">
@@ -23,6 +25,7 @@
                         <div class="uploader__empty-state uploader__empty-state--with-display-name uploader__empty-state--with-directories-selector"><span aria-label="Add files" class="styles_module_wtIcon__d2f058f9 styles_module_wtIcon_Inherit__d2f058f9 openFileDialog"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" class="styles_module_wtIconSvg__d2f058f9" role="img" viewBox="0 0 32 32">
                                     <g clip-path="url(#wt_add_circle_fill_svg__a)">
                                         <path fill="currentColor" fill-rule="evenodd" d="M16 0C7.163 0 0 7.163 0 16s7.163 16 16 16 16-7.163 16-16S24.837 0 16 0m.75 10.667a.75.75 0 0 0-1.5 0v4.583h-4.583a.75.75 0 0 0 0 1.5h4.583v4.583a.75.75 0 0 0 1.5 0V16.75h4.583a.75.75 0 0 0 0-1.5H16.75z" clip-rule="evenodd"></path>
+
                                     </g>
                                     <defs>
                                         <clipPath id="wt_add_circle_fill_svg__a">
@@ -31,7 +34,8 @@
                                     </defs>
                                 </svg></span>
                             <div class="uploader__empty-state-text">
-                                <h2>Add files</h2><button type="button" class="uploader__sub-title uploader__directories-dialog-trigger" data-testid="no-uploads-directories-selector">Or select a folder</button>
+                                <h2>Add files</h2>
+                                <!-- <button type="button" class="uploader__sub-title uploader__directories-dialog-trigger" data-testid="no-uploads-directories-selector">Or select a folder</button> -->
                                 <input type="file" class="form-control d-none fileInput" name="fileToTransfer">
                             </div>
                         </div>
@@ -61,7 +65,7 @@
                             </div>
                         </div>
                         <div class="transfer__footer">
-                            <div class="TransferOptionsIconBar_iconbar__yu_2U"><span aria-haspopup="true" aria-expanded="false" data-popover="custom popover" id="wt-popover-target-GHOFVDYq_6mbg2WB_ans_" aria-describedby="wt-popover-content-R-Jhdn8etJYfODvMF6q6d">
+                            <!-- <div class="TransferOptionsIconBar_iconbar__yu_2U"><span aria-haspopup="true" aria-expanded="false" data-popover="custom popover" id="wt-popover-target-GHOFVDYq_6mbg2WB_ans_" aria-describedby="wt-popover-content-R-Jhdn8etJYfODvMF6q6d">
                                     <div><button class="TransferOptionsIconBar_iconButton__Ioj99" aria-label="Set expiry option" data-testid="iconbar-option-expiry" tabindex="0" data-target="Expiry" data-tracking-feature="Expiry" data-tracking-feature-state="Enabled" data-tracking-feature-value="3d"><span aria-hidden="true" data-testid="iconbar-icon" class="styles_module_wtIcon__d2f058f9 styles_module_wtIcon_Inherit__d2f058f9 TransferOptionsIconBar_icon___mlPL"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" class="styles_module_wtIconSvg__d2f058f9" role="img" viewBox="0 0 32 32">
                                                     <g stroke="currentColor" stroke-width="1.5" clip-path="url(#wt_calendar_svg__a)">
                                                         <rect width="26.667" height="24" x="2.667" y="5.333" rx="5.333"></rect>
@@ -95,7 +99,7 @@
                                                     </g>
                                                 </svg></span></button></div>
                                 </span>
-                            </div>
+                            </div> -->
                             <div class="transfer__footer--iconbar"><button class="styles_module_wtButton__38691ab2 styles_module_wtButton_Medium__38691ab2 styles_module_wtButtonPrimaryDefault_Light__38691ab2 transfer__button transfer__button--inactive" type="submit" data-testid="uploaderForm-transfer-button">Transfer</button></div>
                         </div>
                     </form>
@@ -115,7 +119,7 @@
                 <div class="gif-container" style="display: none;">
                     <dotlottie-player src="https://lottie.host/a91c7bb1-7a5a-40f5-8720-5d61a93a8282/QQ0RJLBzGQ.json" background="transparent" speed="1" style="width: 300px; height: 200px;" loop autoplay></dotlottie-player>
                     <p class="success-message">You’re done!</p>
-                    <p class="complete__text">Copy your download link or <a href="/transfer/progress">see what's inside</a></p>
+                    <p class="complete__text">Copy your download link or <a href="" id="insideLink">see what's inside</a></p>
                     <!-- <p class="success-message">Loading, please wait...</p> -->
                     <div class="text-center">
                         <input type="text" class="form-control file_link mb-2" id="fileLink" name="fileLink" readonly>
@@ -146,11 +150,11 @@
             $('.fileInput').click();
         })
 
-        // $('.fileInput').change(function() {
-        //     var fileName = $(this)[0].files[0].name;
-        //     $('.title').val(fileName);
-        //     // console.log(fileInput);
-        // })
+         $('.fileInput').change(function() {
+             var fileName = $(this)[0].files[0].name;
+             $('.title').val(fileName);
+              //console.log(fileInput);
+         })
 
         $('#getLink').on('submit', function(e) {
             e.preventDefault(); // Prevent the form from refreshing the page
@@ -172,6 +176,7 @@
                         $('.upload-form').hide();
                         $('.card-loader').hide();
                         $('.file_link').val(response.fileLink);
+                        $('#insideLink').attr('href', response.fileLink);
                         $('.gif-container').show();
                     }
                     console.log(response);

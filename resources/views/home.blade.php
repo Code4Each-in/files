@@ -91,40 +91,40 @@
                                 <div class="masthead-content text-white">
                                     <h1 class="fst-italic lh-1 mb-4">Our Website is Coming Soon</h1>
                                     <!-- <p class="mb-5">We're working hard to finish the development of this site. Sign up below to receive updates and to be notified when we launch!</p> -->
-                                    <div class="slick">
-                                        <div class="item">
-                                            <div class="bg">
-                                                <img src="{{ asset('assets/image/slide1.jpg') }}" alt="Slide 1">
+                                    <div class="slick" >
+                                        <div class="item" >
+                                            <div class="bg" >
+                                                <img src="{{ asset(config('app.asset_url').'assets/image/slide1.jpg') }}" alt="Slide 1">
                                             </div>
                                         </div>
                                         <div class="item">
                                             <div class="bg">
-                                                <img src="{{ asset('assets/image/slide2.jpeg') }}" alt="Slide 2">
+                                                <img src="{{ asset(config('app.asset_url').'assets/image/slide2.jpeg') }}" alt="Slide 2">
                                             </div>
                                         </div>
                                         <div class="item">
                                             <div class="bg">
-                                                <img src="{{ asset('assets/image/slide3.jpeg') }}" alt="Slide 3">
+                                                <img src="{{ asset(config('app.asset_url').'assets/image/slide3.jpeg') }}" alt="Slide 3">
                                             </div>
                                         </div>
                                         <div class="item">
                                             <div class="bg">
-                                                <img src="{{ asset('assets/image/slide4.jpeg') }}" alt="Slide 4">
+                                                <img src="{{ asset(config('app.asset_url').'assets/image/slide4.jpeg') }}" alt="Slide 4">
                                             </div>
                                         </div>
                                         <div class="item">
                                             <div class="bg">
-                                                <img src="{{ asset('assets/image/slide5.jpeg') }}" alt="Slide 5">
+                                                <img src="{{ asset(config('app.asset_url').'assets/image/slide5.jpeg') }}" alt="Slide 5">
                                             </div>
                                         </div>
                                         <div class="item">
                                             <div class="bg">
-                                                <img src="{{ asset('assets/image/slide6.jpeg') }}" alt="Slide 2">
+                                                <img src="{{ asset(config('app.asset_url').'assets/image/slide6.jpg') }}" alt="Slide 2">
                                             </div>
                                         </div>
                                         <div class="item">
                                             <div class="bg">
-                                                <img src="{{ asset('assets/image/slide7.jpeg') }}" alt="Slide 7">
+                                                <img src="{{ asset(config('app.asset_url').'assets/image/slide7.jpeg') }}" alt="Slide 7">
                                             </div>
                                         </div>
                                     </div>

@@ -6,7 +6,7 @@
     <div class="app-header header-shadow">
         <div class="app-header__logo">
             <div class="logo-src">
-                <img src="{{ asset('assets/image/black-logo.png') }}">
+                <img src="{{ asset(config('app.asset_url').'assets/image/black-logo.png') }}">
             </div>
             <div class="header__pane ml-auto">
                 <div>
