@@ -97,7 +97,7 @@ header.header-section:before {
   display: flex;
   position: relative;
   width: 100%;
-  height: 100vh; /* Full viewport height */
+  height: 90vh; /* Full viewport height */
   background: aliceblue;
 }
 
@@ -328,6 +328,9 @@ div#navbarButtonsExample button.btn.btn-primary:hover {
   border: 2px solid #2e5555;
   background: transparent;
   color: #2e5555;
+}
+main#main {
+  overflow: hidden;
 }
 /* Responsive adjustments */
 @media (max-width: 991px) {

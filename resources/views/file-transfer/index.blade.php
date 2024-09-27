@@ -1,6 +1,6 @@
 @push('styles')
 <style>
-    /* #circle-loader-wrap{
+    /* #circle-loader-wrap{x
         display: none;
     } */
     .loading-msg {
@@ -10,6 +10,22 @@
     .copy-btn {
         background-color: #2a5555;
         color: white;
+    }
+
+    .copy-btn:hover {
+        color: white;
+    }
+
+    .btn.disabled,
+    .btn:disabled {
+        opacity: .65;
+        background: #2a5555;
+        color: #fff !important;
+    }
+
+    .form-check-input:checked {
+        background-color: #2a5555;
+        border-color: #2a5555
     }
 </style>
 @endpush
@@ -52,13 +68,13 @@
                                 </div>
                                 <div class="form-check col-12 ms-3">
                                     <input class="form-check-input" type="radio" name="file_type" id="fileType" value="public">
-                                    <label class="form-check-label" for="fileType1">
+                                    <label class="form-check-label" for="fileType">
                                         Public
                                     </label>
                                 </div>
                                 <div class="form-check col-12 ms-3">
                                     <input class="form-check-input" type="radio" name="file_type" id="file_type" value="private">
-                                    <label class="form-check-label" for="fileType2">
+                                    <label class="form-check-label" for="file_type">
                                         Private
                                     </label>
                                 </div>
@@ -124,7 +140,7 @@
                     <div class="text-center">
                         <input type="text" class="form-control file_link mb-2" id="fileLink" name="fileLink" readonly>
                         <button type="button" id="copy-link" class="btn copy-btn">Copy Link</button>
-                        <button type="button" id="copied" class="btn btn-primary" style="display: none;" disabled>Copied !</button>
+                        <!-- <button type="button" id="copied" class="btn btn-primary" style="display: none;" disabled>Copied !</button> -->
                     </div>
                 </div>
                 <!-- <p class="complete__text">We’re making magic happen!</p> -->
@@ -134,12 +150,14 @@
     </div>
     <!-- Right: Form Section -->
 </div>
-
 @section('js_scripts')
 <script>
     // $=jQuery;
     $(document).ready(function() {
-        $("#copy-link").show();
+        $('#copy-link').attr('disabled', false);
+        $('#copy-link').text('Copy Link');
+        // $("#copy-link").show();
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -150,15 +168,16 @@
             $('.fileInput').click();
         })
 
-         $('.fileInput').change(function() {
-             var fileName = $(this)[0].files[0].name;
-             $('.title').val(fileName);
-              //console.log(fileInput);
-         })
+        $('.fileInput').change(function() {
+            var fileName = $(this)[0].files[0].name;
+            $('.title').val(fileName);
+            //console.log(fileInput);
+        })
 
         $('#getLink').on('submit', function(e) {
             e.preventDefault(); // Prevent the form from refreshing the page
             // Create a FormData object to hold the form data, including files
+            $('#insideLink').attr('href', '');
             $('.upload-form').hide();
             $('.card-loader').show();
             var formData = new FormData(this);
@@ -203,6 +222,7 @@
 
         $("#copy-link").on('click', function() {
             // Select the input field with the URL
+
             var link = $("#fileLink");
             // Select the text in the input field
             link.select();
@@ -210,8 +230,10 @@
             link[0].setSelectionRange(0, 99999); // For mobile devices
             // Copy the text inside the input field
             document.execCommand('copy');
-            $('#copy-link').hide();
-            $('#copied').show();
+            $('#copy-link').text('Copied !');
+            $('#copy-link').attr('disabled', true);
+            // $('#copy-link').hide();
+            // $('#copied').show();
         })
     })
 </script>
