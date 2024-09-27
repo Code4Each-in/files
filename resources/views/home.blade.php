@@ -89,7 +89,7 @@
                         <div class="col-lg-8 col-md-12">
                             <div class="masthead">
                                 <div class="masthead-content text-white">
-                                    <h1 class="fst-italic lh-1 mb-4">Our Website is Coming Soon</h1>
+                                    <h1 class="fst-italic lh-1 mb-4">Unlock the Power of Sharing</h1>
                                     <!-- <p class="mb-5">We're working hard to finish the development of this site. Sign up below to receive updates and to be notified when we launch!</p> -->
                                     <div class="slick" >
                                         <div class="item" >

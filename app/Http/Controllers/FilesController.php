@@ -19,10 +19,16 @@ class FilesController extends Controller
     {
         //  print_r($resquest->uniquid);    
         //  echo $request->title.'<br>'.$request->message; 
+        
+        ini_set('upload_max_filesize', '500M');
+        ini_set('post_max_size', '500M');
+        ini_set('memory_limit', '512M');
+        ini_set('max_execution_time', '300');  // Increase execution time if necessary
+
+
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'fileToTransfer' => 'required|max:512000'
-
         ]);
         $fileName = '';
         $fileType = ((isset($request->file_type) && !empty($request->file_type)) ? $request->file_type : null);

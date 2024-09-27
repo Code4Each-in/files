@@ -227,6 +227,29 @@ button:active {
  /* margin-top: 0.25em;
   */
 }
+.login_btn,.register_btn {
+    padding: 10px 16px;
+    color: white;
+    font-size: 12px;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+    left: 50%;
+    background: #2a5555;
+    border: 2px solid #2a5555;
+    text-align: center;
+    font-weight: 600;
+}
+.login_btn:hover, .register_btn:hover {
+    background: transparent;
+    color: #2a5555;
+}
+.login_slide_btn:hover {
+    color: white;
+}
+.register_slide_btn:hover {
+    color: white;
+}
+
 </style>
 @endpush
 @section('content')
@@ -257,13 +280,13 @@ button:active {
                 <input type="password" name="password_confirmation" placeholder="Confirm Password" id="password_confirmation" class="form-control">
                 <div id="password_confirmationError" class="text-danger"></div>
             </div>
-            <button type="button" id="signUpButton">Register</button>
+            <button type="button" class="register_btn" id="signUpButton">Register</button>
         </form>
     </div>
     <div class="sign-in">
         <form id="signInForm" novalidate>
             @csrf
-            <h1>Sign In</h1>
+            <h1>Log In</h1>
             <div class="form-group">
                 <input type="email" name="email1" placeholder="Email" id="signInEmail" class="form-control">
                 <div id="signInEmailError" class="text-danger"></div>
@@ -272,7 +295,7 @@ button:active {
                 <input type="password" name="password1" placeholder="Password" id="signInPassword" class="form-control">
                 <div id="signInPasswordError" class="text-danger"></div>
             </div>
-            <button type="button" id="signInButton">Log In</button>
+            <button type="button" class="login_btn" id="signInButton">Log In</button>
         </form>
     </div>
 
@@ -282,13 +305,13 @@ button:active {
                 <h1>Welcome Back To C4E</h1>
                 <p>To keep connected with us please login with your personal info</p>
                 <!-- <button id="SignIn">Log In</button> -->
-                <a href="{{ route('login') }}" class="button" id="SignIn">Log In</a>
+                <a href="{{ route('login') }}" class="button register_slide_btn" id="SignIn">Log In</a>
             </div>
             <div class="overlay-right">
                 <h1>Welcome To Join C4E</h1>
-                <p>Enter your personal details and start your journey with us</p>
+                <p>Enter your details and start your journey with us</p>
                 <!-- <button id="SignUp">Register</button> -->
-                <a href="{{ route('register') }}" class="button" id="SignUp">Register</a>
+                <a href="{{ route('register') }}" class="button register_slide_btn" id="SignUp">Register</a>
             </div>
         </div>
     </div>
