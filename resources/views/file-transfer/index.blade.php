@@ -35,6 +35,20 @@
     <div class="form-design">
         <div class="card px-3 py-4 shadow-lg">
             <div class="card-body">
+            @if ($fileLink)
+                <div class="gif-container">
+                    <dotlottie-player src="https://lottie.host/a91c7bb1-7a5a-40f5-8720-5d61a93a8282/QQ0RJLBzGQ.json" background="transparent" speed="1" style="width: 300px; height: 200px;" loop autoplay></dotlottie-player>
+                    <p class="success-message">You’re done!</p>
+                    <p class="complete__text">Copy your download link or <a href="" id="insideLink">see what's inside</a></p>
+                    <!-- <p class="success-message">Loading, please wait...</p> -->
+                    <div class="text-center">
+                        <input type="text" class="form-control file_link mb-2 fileLinkAddress" id="fileLink" name="fileLink" value="{{ $fileLink }}" readonly>
+                        <button type="button" id="copy-link" class="btn copy-btn">Copy Link</button>
+                        <!-- <button type="button" id="copied" class="btn btn-primary" style="display: none;" disabled>Copied !</button> -->
+                    </div>
+                </div>
+  
+            @else
                 <div class="upload-form">
                     <form action="{{ route('generate_link') }}" method="post" enctype="multipart/form-data" id="getLink">
                         @csrf
@@ -120,6 +134,8 @@
                         </div>
                     </form>
                 </div>
+            @endif
+               
                 <div class="card-loader" style="display: none;">
                     <div id="circle-loader-wrap">
                         <div class="left-wrap">
@@ -132,19 +148,18 @@
                     </div>
                     <div class="cancel text-center"><span class="loading-msg">Transferring...</span><br><br><button type="button" class="styles_module_wtButton__38691ab2 styles_module_wtButton_Medium__38691ab2 styles_module_wtButtonPrimaryDefault_Light__38691ab2 transfer__button transfer__button--inactive">Cancel</button></div>
                 </div>
-                <div class="gif-container" style="display: none;">
+                <div class="gif-container gif-show-cont" style="display:none">
                     <dotlottie-player src="https://lottie.host/a91c7bb1-7a5a-40f5-8720-5d61a93a8282/QQ0RJLBzGQ.json" background="transparent" speed="1" style="width: 300px; height: 200px;" loop autoplay></dotlottie-player>
                     <p class="success-message">You’re done!</p>
                     <p class="complete__text">Copy your download link or <a href="" id="insideLink">see what's inside</a></p>
                     <!-- <p class="success-message">Loading, please wait...</p> -->
                     <div class="text-center">
-                        <input type="text" class="form-control file_link mb-2" id="fileLink" name="fileLink" readonly>
+                        <input type="text" class="form-control file_link mb-2 fileLinkAddress" id="fileLink" name="fileLink" value="{{ $fileLink }}" readonly>
                         <button type="button" id="copy-link" class="btn copy-btn">Copy Link</button>
                         <!-- <button type="button" id="copied" class="btn btn-primary" style="display: none;" disabled>Copied !</button> -->
                     </div>
                 </div>
                 <!-- <p class="complete__text">We’re making magic happen!</p> -->
-
             </div>
         </div>
     </div>
@@ -196,7 +211,7 @@
                         $('.card-loader').hide();
                         $('.file_link').val(response.fileLink);
                         $('#insideLink').attr('href', response.fileLink);
-                        $('.gif-container').show();
+                        $('.gif-show-cont').show();
                     }
                     console.log(response);
                 },
@@ -223,7 +238,7 @@
         $("#copy-link").on('click', function() {
             // Select the input field with the URL
 
-            var link = $("#fileLink");
+            var link = $(".fileLinkAddress");
             // Select the text in the input field
             link.select();
 
