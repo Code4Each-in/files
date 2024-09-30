@@ -55,7 +55,7 @@
                             <div class="widget-content-left ml-3 header-user-info">
                                 <div class="widget-heading">
                                     @if(Auth::check())
-                                    <p>Welcome {{ Auth::user()->name }} !</p>
+                                    <p>{{ Auth::user()->name }}</p>
                                     @endif
                                 </div>
                                 <!-- <div class="widget-subheading">
@@ -72,14 +72,9 @@
                                     <div tabindex="-1" role="menu" aria-hidden="true"
                                         class="dropdown-menu dropdown-menu-right" x-placement="bottom-end"
                                         style="position: absolute;transform: translate3d(-145px, 50px, 0px);top: 0px;left: 0px;will-change: transform;">
-                                        <button type="button" tabindex="0" class="dropdown-item">User
-                                            Account</button>
+                                        <!-- <button type="button" tabindex="0" class="dropdown-item">User
+                                            Account</button> -->
                                         <a href="{{ route('logout') }}" class="dropdown-item">Logout</a>
-                                        <!-- <button type="button" tabindex="0" class="dropdown-item">Settings</button>
-                                            <h6 tabindex="-1" class="dropdown-header">Header</h6>
-                                            <button type="button" tabindex="0" class="dropdown-item">Actions</button>
-                                            <div tabindex="-1" class="dropdown-divider"></div>
-                                            <button type="button" tabindex="0" class="dropdown-item">Dividers</button> -->
                                     </div>
                                 </div>
                             </div>
@@ -91,12 +86,12 @@
             </div>
         </div>
     </div>
-    <div class="ui-theme-settings settings-open">
+    <!-- <div class="ui-theme-settings settings-open">
         <button type="button" class="btn-open-options btn btn-danger text-white">
             <i class="fa fa-cog fa-w-16 fa-spin fa-2x"></i>
         </button>
 
-    </div>
+    </div> -->
     <div class="app-main">
         <div class="app-sidebar sidebar-shadow">
             <div class="app-header__logo">
@@ -262,13 +257,13 @@
 
         // Copy the text inside the text area
         document.execCommand("copy");
-        $('.copyLink').text('Copied');
+        // $('.copyLink').text('Copied');
 
         // Remove the temporary text area element
         document.body.removeChild(tempInput);
 
         // Show a confirmation alert or message
-        // alert("Link copied to clipboard: " + link);
+        alert("Link copied to clipboard: " + link);
     }
 </script>
 @endsection
