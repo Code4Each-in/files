@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,6 +45,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         // Extract custom field names
+        // dd($request->fileId);
         $customData = $request->only(['email1', 'password1']);
         $validatedData = $request->validate([
             'email1' => 'required',
@@ -60,13 +62,30 @@ class AuthController extends Controller
             'password' => $customData['password1']
         ])) {
             $user = Auth::user();
-            return response()->json([
+            if(isset($request->fileId) && !empty($request->fileId)){
+            //   $fileDetail = File::where([['unique_id', $request->fileId],['private_link_hit', 'Y'],])->get();
+            //   dd($fileDetail);
+              return response()->json([
                 'message' => 'Login successful!',
                 'user' => [
                     'id' => $user->id,
                     'name' => $user->name,
+                    // 'fileLink' => $fileDetail[0]['file_link'],
+                    'fileId' => $request->fileId,
+                    'hasFileId' => true, 
                 ]
             ]);
+            }else{
+
+                return response()->json([
+                    'message' => 'Login successful!',
+                    'user' => [
+                        'id' => $user->id,
+                        'name' => $user->name,
+                        'hasFileId' => false,
+                    ]
+                ]);
+            }
         } else {
             return response()->json([
                 'message' => 'Invalid credentials'
