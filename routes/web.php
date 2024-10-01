@@ -45,5 +45,9 @@ Route::get('logout', [AuthController::class, 'logOut'])->name('logout');
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 Route::delete('delete_file_link', [DashboardController::class, 'deleteFileLink'])->name('delete_file_link');
 
+//=========================Upload Files in chunks================
+Route::post('/upload-chunk', [FilesController::class, 'uploadChunk'])->name('upload.chunk');
+Route::post('/generate-link', [FilesController::class, 'generateLink'])->name('generate_link');
+
 
 
