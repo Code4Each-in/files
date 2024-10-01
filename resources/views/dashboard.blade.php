@@ -224,7 +224,7 @@
         $('.dlt-btn').on('click', function(e) {
             e.preventDefault();
             var rowid = $(this).data('rowid');
-            console.log(rowid);
+            //console.log(rowid);
             $.ajax({
                 url: "{{ route('delete_file_link') }}",
                 type: 'delete',

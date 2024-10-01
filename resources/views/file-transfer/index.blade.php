@@ -272,7 +272,7 @@
                     processData: false,
                     contentType: false,
                     success: function(response) {
-                        console.log(response)
+                        // console.log(response)
                         if (response.status) {
                             currentChunk++;
                             if (currentChunk < totalChunks) {
