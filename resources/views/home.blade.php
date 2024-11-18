@@ -47,7 +47,7 @@
                 @if(Auth::check())
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">                        
-                        Welcome {{ Auth::user()->name }} !                        
+                        {{ Auth::user()->name }} !                        
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li><a class="dropdown-item" href="{{ route('dashboard') }}">Dashborad</a></li>
