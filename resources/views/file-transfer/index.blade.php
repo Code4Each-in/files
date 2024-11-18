@@ -189,51 +189,147 @@
             //console.log(fileInput);
         })
 
+        // $('#getLink').on('submit', function(e) {
+        //     e.preventDefault(); // Prevent the form from refreshing the page
+        //     // Create a FormData object to hold the form data, including files
+        //     $('#insideLink').attr('href', '');
+        //     $('.upload-form').hide();
+        //     $('.card-loader').show();
+        //     var formData = new FormData(this);
+        //     $('#titleError').text('');
+        //     $('#fileError').text('');
+        //     $.ajax({
+        //         url: "{{ route('generate_link') }}",
+        //         method: 'POST',
+        //         data: formData,
+        //         processData: false, // Don't process the data
+        //         contentType: false, // Set contentType to false as FormData automatically sets the correct content type
+        //         success: function(response) {
+        //             // var result =JSON.parse(response);                    
+        //             if (response.status) {
+        //                 $('.upload-form').hide();
+        //                 $('.card-loader').hide();
+        //                 $('.file_link').val(response.fileLink);
+        //                 $('#insideLink').attr('href', response.fileLink);
+        //                 $('.gif-show-cont').show();
+        //             }
+        //             console.log(response);
+        //         },
+        //         error: function(response) {
+        //             $('.card-loader').hide();
+        //             $('.upload-form').show();
+        //             if (response.status === 422) { // Validation error
+        //                 var errors = response.responseJSON.errors;
+        //                 if (errors.title) {
+        //                     $('#titleError').text(errors.title[0]); // Show title validation error
+        //                 }
+        //                 if (errors.fileToTransfer) {
+        //                     $('#fileError').text(errors.fileToTransfer[0]); // Show file validation error
+        //                 }
+        //             } else {
+        //                 alert('An error occurred.');
+        //             }
+        //         }
+
+        //     })
+
+        // })
+
         $('#getLink').on('submit', function(e) {
             e.preventDefault(); // Prevent the form from refreshing the page
-            // Create a FormData object to hold the form data, including files
+
+            const fileInput = $('.fileInput')[0]; // Ensure the file input has this ID
+            const file = fileInput.files[0]; // Get the file
+            if (!file) {
+                $('#fileError').text('Please select a file.');
+                return;
+            }
+
+            const chunkSize = 1024 * 1024; // 1 MB
+            const totalChunks = Math.ceil(file.size / chunkSize);
+            const uniqueId = Date.now(); // Unique ID for this upload
+            let currentChunk = 0;
+
             $('#insideLink').attr('href', '');
             $('.upload-form').hide();
             $('.card-loader').show();
-            var formData = new FormData(this);
-            $('#titleError').text('');
-            $('#fileError').text('');
-            $.ajax({
-                url: "{{ route('generate_link') }}",
-                method: 'POST',
-                data: formData,
-                processData: false, // Don't process the data
-                contentType: false, // Set contentType to false as FormData automatically sets the correct content type
-                success: function(response) {
-                    // var result =JSON.parse(response);                    
-                    if (response.status) {
-                        $('.upload-form').hide();
+
+            function uploadChunk() {
+                const start = currentChunk * chunkSize;
+                const end = Math.min(start + chunkSize, file.size);
+                const chunk = file.slice(start, end);
+                const formData = new FormData();
+                formData.append('fileToTransfer', chunk);
+                formData.append('chunk', currentChunk);
+                formData.append('totalChunks', totalChunks);
+                formData.append('unique_id', uniqueId); // Unique identifier for the session
+                formData.append('original_filename', file.name); // Add original filename
+
+                $.ajax({
+                    url: "{{ route('upload.chunk') }}", // Update this route to handle chunk uploads
+                    method: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        // console.log(response)
+                        if (response.status) {
+                            currentChunk++;
+                            if (currentChunk < totalChunks) {
+                                uploadChunk(); // Upload the next chunk
+                            } else {
+                                generateLink(); // All chunks uploaded, generate the link
+                            }
+                        } else {
+                            alert('Error uploading chunk.');
+                            $('.upload-form').show();
+                            $('.card-loader').hide();
+                        }
+                    },
+                    error: function(response) {
                         $('.card-loader').hide();
-                        $('.file_link').val(response.fileLink);
-                        $('#insideLink').attr('href', response.fileLink);
-                        $('.gif-show-cont').show();
-                    }
-                    console.log(response);
-                },
-                error: function(response) {
-                    $('.card-loader').hide();
-                    $('.upload-form').show();
-                    if (response.status === 422) { // Validation error
-                        var errors = response.responseJSON.errors;
-                        if (errors.title) {
-                            $('#titleError').text(errors.title[0]); // Show title validation error
+                        $('.upload-form').show();
+                        if (response.status === 422) { // Validation error
+                            var errors = response.responseJSON.errors;
+                            if (errors.fileToTransfer) {
+                                $('#fileError').text(errors.fileToTransfer[0]); // Show file validation error
+                            }
+                        } else {
+                            alert('An error occurred while uploading.');
                         }
-                        if (errors.fileToTransfer) {
-                            $('#fileError').text(errors.fileToTransfer[0]); // Show file validation error
-                        }
-                    } else {
-                        alert('An error occurred.');
                     }
-                }
+                });
+            }
 
-            })
+            function generateLink() {
+                $.ajax({
+                    url: "{{ route('generate_link') }}",
+                    method: 'POST',
+                    data: {
+                        'file_unique_id': uniqueId, // Send the unique ID to generate the link
+                        'original_filename': file.name,
+                        'file_type': $('#fileType').val(),
+                    },
+                    success: function(response) {
+                        if (response.status) {
+                            $('.upload-form').hide();
+                            $('.card-loader').hide();
+                            $('.file_link').val(response.fileLink);
+                            $('#insideLink').attr('href', response.fileLink);
+                            $('.gif-show-cont').show();
+                        }
+                    },
+                    error: function(response) {
+                        $('.card-loader').hide();
+                        $('.upload-form').show();
+                        alert('An error occurred while generating the link.');
+                    }
+                });
+            }
 
-        })
+            uploadChunk(); // Start uploading chunks
+        });
+
 
         $("#copy-link").on('click', function() {
             // Select the input field with the URL
