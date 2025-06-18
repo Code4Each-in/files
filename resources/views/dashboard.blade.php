@@ -261,7 +261,6 @@
 
         // Remove the temporary text area element
         document.body.removeChild(tempInput);
-
         // Show a confirmation alert or message
         alert("Link copied to clipboard: " + link);
     }
